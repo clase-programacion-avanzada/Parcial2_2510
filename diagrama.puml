@@ -1,0 +1,43 @@
+@startuml
+skinparam classAttributeIconSize 0
+abstract class Personaje {
+    - vida: int
+    - ataqueBase: int
+    + Personaje(int ataqueBase, int vida)
+    + atacarObjetivos(): void
+    + abstract atacar(Personaje objetivo): void
+}
+
+class Dragon extends Personaje {
+    - dañoFuego: int
+    + Dragon(int vida, int ataqueBase, int dañoFuego)
+    + atacar(Personaje objetivo): void
+}
+
+class Soldado extends Personaje {
+
+    + Soldado(int vida, int ataqueBase, int durabilidad)
+    + atacar(Personaje objetivo): void
+}
+
+class Arma {
+    - ataque: int
+    - durabilidad: int
+}
+
+class Region {
+   - capital: String
+   - recursos: int
+
+   + anadirPersonaje(String tipoPersonaje) : void
+   + cantidadDragonesPoderosos() : int
+   + guardarPersonajesBinario(String ruta) : void
+   + guardarPersonajesTextto(String ruta) : void
+}
+
+Personaje "1" *--> "*" Personaje : -objetivos : List
+Soldado "1" --> "1" Arma : -arma
+Region "1" *-> "*" Personaje : -ejercito : List
+
+
+@enduml
